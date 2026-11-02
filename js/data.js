@@ -141,7 +141,7 @@ window.PROJECTS = [
     sub:  { en: "with AI Diagnostics", he: "עם אבחון AI" },
     one: {
       en: "Break a real EKS cluster on purpose and get an AI-written root-cause analysis with the fix.",
-      he: "שוברים בכוונה קלאסטר EKS אמיתי, וקבלו ניתוח שורש תקלה בעזרת AI יחד עם הפתרון."
+      he: "שוברים בכוונה קלאסטר EKS אמיתי, ומקבלים ניתוח שורש תקלה בעזרת AI יחד עם הפתרון."
     },
     tags: ["AWS EKS", "Terraform", "Kubernetes", "FastAPI", "React", "Ollama"],
     stack: ["aws", "terraform", "kubernetes", "python", "javascript", "bash", "ollama", "git"],
@@ -256,7 +256,7 @@ window.PROJECTS = [
     },
     hard: {
       en: "The tool first flagged files that are broken on purpose, like the failure scenarios in my EKS simulator, as real problems. I taught it to recognize example, test and scenario files and skip them (or a `# devops-checker: ignore` marker). The UI also needed work: text was not centered properly and there were no animations until I added them.",
-      he: "הכלי סימן בהתחלה כבעיות אמיתיות קבצים ששבורים בכוונה, כמו תרחישי התקלה בסימולטור ה-EKS שלי. לימדתי אותו לזהות קבצי דוגמה, בדיקה ותרחיש ולדלג עליהם (או סימון `# devops-checker: ignore`). גם בממשק היה מה לשפר: הטקסט לא היה ממורכז כמו שצריך ולא היו אנימציות עד שהוספתי."
+      he: "הכלי סימן בהתחלה כבעיות אמיתיות קבצים שבורים בכוונה, כמו תרחישי התקלה בסימולטור ה-EKS שלי. לימדתי אותו לזהות קבצי דוגמה, בדיקה ותרחיש ולדלג עליהם (או סימון `# devops-checker: ignore`). גם בממשק היה מה לשפר: הטקסט לא היה ממורכז כמו שצריך ולא היו אנימציות עד שהוספתי."
     },
     media: [
       { type: "video", src: "img/rc-demo", poster: "img/rc-demo-poster.webp", cap: "demo.gif · scanning a repo end to end" },
@@ -326,7 +326,7 @@ window.PROJECTS = [
     },
     hard: {
       en: "Two things took the most trial and error. First, the dashboard showed placeholder data that did not match the real pods; it took several attempts to connect it properly to the backend and the live Kubernetes data. Second, setting Jenkins up by hand is a project in itself, so I moved to JCasC, and getting the pipelines to create themselves from a single script did not work at first and needed a lot of experiments.",
-      he: "שני דברים לקחו הכי הרבה ניסוי וטעייה. ראשית, הדשבורד הציג נתוני דמה שלא תאמו ל-pods האמיתיים, ולקח כמה ניסיונות לחבר אותו נכון ל-backend ולנתוני Kubernetes החיים. שנית, להקים Jenkins ידנית זה פרויקט בפני עצמו, ולכן עברתי ל-JCasC, ולגרום לפייפליינים להיווצר לבד מסקריפט אחד לא עבד בהתחלה וצריך היה הרבה ניסויים."
+      he: "שני דברים לקחו הכי הרבה ניסוי וטעייה. ראשית, הדשבורד הציג נתוני דמה שלא תאמו ל-pods האמיתיים, ולקח כמה ניסיונות לחבר אותו נכון ל-backend ולנתוני Kubernetes החיים. שנית, להקים Jenkins ידנית זה פרויקט בפני עצמו, ולכן עברתי ל-JCasC. גם יצירה אוטומטית של הפייפליינים מסקריפט אחד לא עבדה בהתחלה, וזה דרש הרבה ניסויים."
     },
     media: [
       { type: "svg", src: "img/cicd-architecture.svg", cap: "architecture.svg · request path, namespaces and the one-command setup" },
