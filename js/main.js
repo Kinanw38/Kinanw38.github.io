@@ -244,21 +244,40 @@
   addEventListener("scroll", onScroll, { passive: true });
 
   var links = [].slice.call(D.querySelectorAll(".nav a"));
-  if ("IntersectionObserver" in window) {
-    var spy = new IntersectionObserver(function (es) {
-      es.forEach(function (en) {
-        if (en.isIntersecting) links.forEach(function (a) { a.classList.toggle("on", a.getAttribute("href") === "#" + en.target.id); });
-      });
-    }, { rootMargin: "-45% 0px -50% 0px" });
-    ["projects", "stack", "approach", "about", "contact"].forEach(function (id) { var s = D.getElementById(id); if (s) spy.observe(s); });
+  var ind = D.querySelector(".nav-ind"), navEl = D.querySelector(".nav"), curId = null;
+  var ids = ["projects", "stack", "approach", "about", "contact"];
+  function moveInd(instant) {
+    if (!ind) return;
+    var a = links.filter(function (l) { return l.classList.contains("on"); })[0];
+    if (!a || navEl.offsetWidth === 0) { ind.style.opacity = 0; return; }
+    if (instant) ind.style.transition = "none";
+    ind.style.opacity = 1;
+    ind.style.width = a.offsetWidth + "px";
+    ind.style.transform = "translateX(" + a.offsetLeft + "px)";
+    if (instant) { void ind.offsetWidth; ind.style.transition = ""; }
   }
+  function spyUpdate() {
+    var next = null, vh = innerHeight, atEnd = scrollY + vh >= D.documentElement.scrollHeight - 6;
+    if (atEnd) next = "contact";
+    else ids.forEach(function (id) { var el = D.getElementById(id); if (el && el.getBoundingClientRect().top <= vh * 0.4) next = id; });
+    if (next === curId) return;
+    curId = next;
+    links.forEach(function (a) { a.classList.toggle("on", a.getAttribute("href") === "#" + next); });
+    moveInd(false);
+  }
+  var spyT = false;
+  addEventListener("scroll", function () { if (!spyT) { spyT = true; requestAnimationFrame(function () { spyT = false; spyUpdate(); }); } }, { passive: true });
+  addEventListener("resize", function () { moveInd(true); spyUpdate(); });
+  if (D.fonts && D.fonts.ready) D.fonts.ready.then(function () { moveInd(true); });
 
   /* ---------- go ---------- */
   function renderAll() {
     applyStatic(); renderTech(); renderFeatured(); renderRows(); applyFilter(); observeNew(); observeVideos();
+    moveInd(true);
+    requestAnimationFrame(function () { spyUpdate(); moveInd(true); });
   }
   D.getElementById("yr").textContent = new Date().getFullYear();
-  renderAll(); onScroll();
+  renderAll(); onScroll(); spyUpdate();
   var hash = location.hash.slice(1);
   if (hash && byId(hash) && byId(hash).media) openCase(hash);
 })();
