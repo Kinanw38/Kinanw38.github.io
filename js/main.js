@@ -33,13 +33,18 @@
   }
 
   /* ---------- tech stack ---------- */
+  function icon(id) {
+    var d = window.ICONS && window.ICONS[id]; if (!d) return "";
+    return '<svg class="ti' + (d.s ? " s" : "") + '" viewBox="0 0 24 24" aria-hidden="true"><path d="' + (d.f || d.s) + '"/></svg>';
+  }
   function renderTech() {
     D.getElementById("techgrid").innerHTML = TECH.map(function (g) {
       return '<div class="tgroup"><h3>' + esc(tt(g.g)) + '</h3><div class="tchips">' + g.items.map(function (i) {
         var n = techCount(i.id);
-        if (!n) return '<span class="tech off">' + esc(i.label) + "</span>";
+        var ic = icon(i.id);
+        if (!n) return '<span class="tech off">' + ic + esc(i.label) + "</span>";
         return '<button type="button" class="tech" data-tech="' + i.id + '" aria-pressed="' + (activeTech === i.id) + '"' +
-          ' title="' + esc(n === 1 ? tt("stack.n1") : n + " " + tt("stack.nn")) + '"><span>' + esc(i.label) + '</span><i class="n">' + n + "</i></button>";
+          ' title="' + esc(n === 1 ? tt("stack.n1") : n + " " + tt("stack.nn")) + '">' + ic + '<span>' + esc(i.label) + '</span><i class="n">' + n + "</i></button>";
       }).join("") + "</div></div>";
     }).join("");
   }
@@ -86,8 +91,6 @@
         "<h3>" + esc(T(p.name)) + (p.sub ? '<span class="sub">' + esc(T(p.sub)) + "</span>" : "") + "</h3>" +
         '<p class="one">' + esc(T(p.one)) + "</p>" +
         '<div class="facts">' + p.facts.map(function (f) { return "<div><b>" + esc(f.v) + "</b><span>" + esc(T(f.l)) + "</span></div>"; }).join("") + "</div>" +
-        '<div class="chips">' + chipsHtml(p.tags) + "</div>" +
-        (p.coldStart ? '<p class="note">' + esc(tt("dlg.cold")) + "</p>" : "") +
         '<div class="factions"><button class="btn sm" type="button" data-open="' + p.id + '">' + esc(tt("feat.open")) + ICON_ARROW + "</button>" + linkBtns(p, true) + "</div></div></article>";
     }).join("");
   }
@@ -104,7 +107,7 @@
         '<span class="i">' + String(i + 3).padStart(2, "0") + "</span>" +
         '<span class="t">' + esc(T(p.name)) + (p.kind ? '<small class="kind">' + esc(tt("kind." + p.kind)) + "</small>" : "") + "</span>" +
         '<span class="d">' + esc(T(p.one)) + "</span>" +
-        '<span class="chips">' + chipsHtml(p.tags.slice(0, 4)) + "</span>" +
+        '<span class="chips">' + chipsHtml(p.tags.slice(0, 3)) + "</span>" +
         '<span class="plus" aria-hidden="true"></span></button>' +
         '<div class="row-b" id="rb-' + p.id + '" role="region"><div><div class="row-in"><ul>' +
         L(p.bullets).map(function (b) { return "<li>" + esc(b) + "</li>"; }).join("") + "</ul>" +
@@ -189,15 +192,23 @@
     }
   });
 
+  function reduceMotion() { return matchMedia("(prefers-reduced-motion: reduce)").matches; }
   D.getElementById("langBtn").addEventListener("click", function () {
-    lang = lang === "en" ? "he" : "en"; store("rk-lang", lang);
-    var id = currentId;
-    renderAll();
-    if (id) openCase(id);
+    var swap = function () {
+      lang = lang === "en" ? "he" : "en"; store("rk-lang", lang);
+      var id = currentId;
+      renderAll();
+      if (id) openCase(id);
+      root.classList.remove("lang-out");
+    };
+    if (reduceMotion()) { swap(); return; }
+    root.classList.add("lang-out");
+    setTimeout(swap, 180);
   });
   D.getElementById("themeBtn").addEventListener("click", function () {
     var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
     var next = cur === "dark" ? "light" : "dark";
+    if (!reduceMotion()) { root.classList.add("theming"); setTimeout(function () { root.classList.remove("theming"); }, 600); }
     root.setAttribute("data-theme", next); store("rk-theme", next);
     var m = D.querySelector('meta[name="theme-color"]'); if (m) m.content = next === "dark" ? "#111518" : "#ece9e0";
   });
@@ -205,10 +216,13 @@
   /* ---------- reveal, progress, scrollspy, lazy video ---------- */
   var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   var io = "IntersectionObserver" in window ? new IntersectionObserver(function (es) {
-    es.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
+    es.forEach(function (en) {
+      if (en.isIntersecting) en.target.classList.add("in");
+      else if (en.boundingClientRect.top > 0) en.target.classList.remove("in"); /* left via bottom = scrolled back up */
+    });
   }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }) : null;
   function observeNew() {
-    D.querySelectorAll(".rv:not(.in)").forEach(function (el) { if (io && !reduce) io.observe(el); else el.classList.add("in"); });
+    D.querySelectorAll(".rv").forEach(function (el) { if (io && !reduce) io.observe(el); else el.classList.add("in"); });
   }
   var vio = "IntersectionObserver" in window ? new IntersectionObserver(function (es) {
     es.forEach(function (en) {

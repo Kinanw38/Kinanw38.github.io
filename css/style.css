@@ -1,8 +1,6 @@
 /* ---------- fonts (self-hosted, no external requests) ---------- */
+@font-face{font-family:"Noto Serif Hebrew";src:url(../fonts/noto-serif-hebrew-hebrew-wght-normal.woff2) format("woff2");font-weight:100 900;font-display:swap;unicode-range:U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
 @font-face{font-family:"Fraunces";src:url(../fonts/fraunces-latin-wght-normal.woff2) format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
-@font-face{font-family:"Fraunces";src:url(../fonts/fraunces-latin-wght-italic.woff2) format("woff2");font-weight:100 900;font-style:italic;font-display:swap}
-@font-face{font-family:"Frank Ruhl Libre";src:url(../fonts/frank-ruhl-libre-hebrew-500-normal.woff2) format("woff2");font-weight:500;font-display:swap;unicode-range:U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
-@font-face{font-family:"Frank Ruhl Libre";src:url(../fonts/frank-ruhl-libre-hebrew-700-normal.woff2) format("woff2");font-weight:700;font-display:swap;unicode-range:U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
 @font-face{font-family:"Heebo";src:url(../fonts/heebo-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:"Heebo";src:url(../fonts/heebo-latin-500-normal.woff2) format("woff2");font-weight:500;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:"Heebo";src:url(../fonts/heebo-latin-700-normal.woff2) format("woff2");font-weight:700;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
@@ -19,7 +17,7 @@
   --accent:#2c7a70; --accent-ink:#ffffff; --accent-soft:#d3e6e0;
   --mark:#f1dd85; --shadow:#c9c4b5;
   --term:#14191c; --term-ink:#d9ddd6; --term-dim:#7e8984; --term-key:#7cc4b6; --stage:#0c0f11;
-  --serif:"Fraunces","Frank Ruhl Libre",Georgia,"Times New Roman",serif;
+  --serif:"Fraunces","Noto Serif Hebrew",Georgia,"Times New Roman",serif;
   --sans:"Heebo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --radius:14px;
@@ -366,3 +364,73 @@ button.tech[aria-pressed="true"] .n{background:var(--accent-ink);color:var(--acc
   .gal-main img[src$=".svg"]{width:880px;max-width:none}
 }
 .gal-main{direction:ltr}
+
+
+/* =================== v3: cleaner, calmer =================== */
+:root{--line-strong:#bfb9aa}
+:root[data-theme="dark"]{--line-strong:#3a464c}
+body{background-image:none}
+section{padding-top:clamp(64px,10vw,124px)}
+.hero{padding-bottom:clamp(24px,4vw,40px)}
+
+/* highlighter: solid, readable in both themes */
+mark{background:var(--mark);color:#1b2024;padding:.02em .16em .06em;border-radius:6px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+:root{--mark:#f3d95f}
+:root[data-theme="dark"]{--mark:#e3cb62}
+
+/* softer surfaces instead of hard offset shadows */
+.fcard{border:1px solid var(--line-strong);box-shadow:none}
+.fcard:hover{transform:translateY(-4px);box-shadow:0 22px 40px -28px rgba(0,0,0,.45);border-color:var(--ink)}
+.techgrid{border:1px solid var(--line-strong);box-shadow:none}
+.term{border:1px solid var(--line-strong);box-shadow:0 24px 44px -30px rgba(0,0,0,.55)}
+.photo{box-shadow:none}
+.callout{box-shadow:none;border:1px solid var(--line-strong)}
+dialog{box-shadow:0 30px 80px -20px rgba(0,0,0,.5);border:1px solid var(--line-strong)}
+.stage{border-bottom:1px solid var(--line-strong)}
+.btn,.chip-btn{border-color:var(--line-strong)}
+.btn.primary{border-color:var(--ink)}
+.btn:hover,.chip-btn:hover{transform:translateY(-1px);box-shadow:0 8px 16px -10px rgba(0,0,0,.45);border-color:var(--ink)}
+.status{border-color:var(--line-strong)}
+.stats{border-block:1px solid var(--line-strong)}
+.stat+.stat{border-inline-start:1px solid var(--line)}
+.sec-head .rule{height:1px;background:var(--line-strong)}
+[dir="rtl"] .sec-head .rule{background:var(--line-strong)}
+.rows{border-top:1px solid var(--line-strong)}
+.step{border-width:1px;border-color:var(--line-strong)}
+.tech{border-width:1px;border-color:var(--line-strong)}
+button.tech[aria-pressed="true"]{box-shadow:none;border-color:var(--ink)}
+button.tech:hover{box-shadow:none;transform:translateY(-1px);border-color:var(--ink)}
+.tgroup{border-color:var(--line)}
+.gal-main{border:1px solid var(--line-strong)}
+.th{border-width:1.5px}
+
+/* less shouting labels */
+.stat span{text-transform:none;letter-spacing:.01em;font-size:13px}
+.fnum{letter-spacing:.03em}
+.tgroup h3,.blk h3,.sk h3{letter-spacing:.05em}
+.facts{border-style:solid;border-color:var(--line)}
+.facts div+div{border-inline-start:1px solid var(--line)}
+
+/* tech icons: one colour, follows the theme */
+.tech .ti{width:17px;height:17px;flex:none;color:var(--ink)}
+.tech .ti path{fill:currentColor}
+.tech .ti.s path{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.tech.off .ti{color:var(--muted);opacity:.7}
+button.tech[aria-pressed="true"] .ti{color:var(--accent-ink)}
+.tech .n{background:var(--surface-2);color:var(--ink);border:1px solid var(--line)}
+button.tech[aria-pressed="true"] .n{background:var(--accent-ink);color:var(--accent);border-color:transparent}
+
+/* Hebrew: lighter, cleaner display weight */
+[lang="he"] h1,[lang="he"] .sec-head h2,[lang="he"] .fbody h3,[lang="he"] .step h3,[lang="he"] .row-h .t,
+[lang="he"] .tl h3,[lang="he"] .contact h2,[lang="he"] .dlg-body h2{font-weight:600}
+[lang="he"] h1{letter-spacing:-.005em;line-height:1.18}
+[lang="he"] body,[lang="he"] p,[lang="he"] li{letter-spacing:0}
+[lang="he"] .lead{line-height:1.75}
+
+@media (max-width:640px){.techgrid{box-shadow:none}}
+.rv{transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.2,1);will-change:opacity,transform}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+/* smooth theme + language switch */
+.theming, .theming *, .theming *::before, .theming *::after{transition:background-color .45s ease,color .45s ease,border-color .45s ease,fill .45s ease,stroke .45s ease,box-shadow .45s ease!important}
+main,header.top,footer{transition:opacity .18s ease}
+.lang-out main,.lang-out header.top nav,.lang-out footer{opacity:0}
