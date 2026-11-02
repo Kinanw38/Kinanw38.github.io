@@ -434,3 +434,10 @@ button.tech[aria-pressed="true"] .n{background:var(--accent-ink);color:var(--acc
 .theming, .theming *, .theming *::before, .theming *::after{transition:background-color .45s ease,color .45s ease,border-color .45s ease,fill .45s ease,stroke .45s ease,box-shadow .45s ease!important}
 main,header.top,footer{transition:opacity .18s ease}
 .lang-out main,.lang-out header.top nav,.lang-out footer{opacity:0}
+/* nav sliding indicator */
+.nav{position:relative}
+.nav-ind{position:absolute;top:0;bottom:0;left:0;width:0;border-radius:8px;background:var(--surface-2);opacity:0;pointer-events:none;transition:transform .45s cubic-bezier(.65,.05,.25,1),width .45s cubic-bezier(.65,.05,.25,1),opacity .25s ease}
+.nav a{position:relative;z-index:1}
+.nav a.on{background:transparent}
+.nav a.on:hover{background:transparent}
+@media (prefers-reduced-motion:reduce){.nav-ind{transition:none}}
