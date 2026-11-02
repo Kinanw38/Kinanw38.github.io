@@ -57,7 +57,7 @@ window.I18N = {
     "nav.projects": "פרויקטים", "nav.approach": "איך אני עובד", "nav.about": "עליי", "nav.contact": "יצירת קשר",
     "hero.status": "פתוח להצעות · Junior DevOps & Cloud Engineer",
     "hero.h1": "אני שובר Kubernetes <mark>בכוונה</mark>, כדי ללמוד איך מתקנים אותו.",
-    "hero.lead": "שירתתי כטכנאי מטוסים בחיל האוויר, עבדתי כטכנאי מחשבים עצמאי, ועברתי לתחום ה-DevOps והענן. אני בונה פרויקטים מעשיים עם AWS, Kubernetes, Terraform ו-CI/CD.",
+    "hero.lead": "שירתי כטכנאי מטוסים בחיל האוויר, עבדתי כטכנאי מחשבים עצמאי, ועברתי לתחום ה-DevOps והענן. אני בונה פרויקטים מעשיים עם AWS, Kubernetes, Terraform ו-CI/CD.",
     "cta.cv": "הורדת קורות חיים", "cta.linkedin": "הודעה בלינקדאין", "cta.github": "GitHub",
     "term.file": "whoami.sh", "term.role": "role", "term.stack": "stack", "term.focus": "focus", "term.base": "base", "term.status": "status",
     "term.roleV": "Junior DevOps & Cloud", "term.focusV": "IaC · CI/CD · observability", "term.baseV": "Beer Sheva, Israel", "term.statusV": "open to work",
