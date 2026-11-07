@@ -51,7 +51,8 @@ window.I18N = {
     "foot.l": "Hand-built with plain HTML, CSS and JS. Hosted on GitHub Pages.",
     "dlg.close": "Close", "dlg.what": "What it does", "dlg.built": "What I built", "dlg.hard": "The hard part", "dlg.stack": "Stack",
     "dlg.problem": "Why I built it", "dlg.result": "Result", "dlg.gallery": "Screenshots", "dlg.cold": "Free hosting: the demo's backend may take a few seconds to wake up on first load.",
-    "gal.video": "demo (video)", "meta.title": "Ron Keinan | Junior DevOps & Cloud Engineer"
+    "gal.video": "demo (video)", "meta.title": "Ron Keinan | Junior DevOps & Cloud Engineer",
+    "dlg.version": "Version", "dlg.v2": "V2 · current", "dlg.v1": "V1 · original", "dlg.v1title": "About V1", "dlg.improved": "What improved in V2"
   },
   he: {
     "nav.projects": "פרויקטים", "nav.approach": "איך אני עובד", "nav.about": "עליי", "nav.contact": "יצירת קשר",
@@ -93,7 +94,8 @@ window.I18N = {
     "foot.l": "נבנה ביד עם HTML, CSS ו-JS רגילים. מתארח ב-GitHub Pages.",
     "dlg.close": "סגירה", "dlg.what": "מה זה עושה", "dlg.built": "מה בניתי", "dlg.hard": "החלק הקשה", "dlg.stack": "טכנולוגיות",
     "dlg.problem": "למה בניתי את זה", "dlg.result": "תוצאה", "dlg.gallery": "צילומי מסך", "dlg.cold": "אירוח חינמי: ה-backend של הדמו עשוי לקחת כמה שניות להתעורר בטעינה הראשונה.",
-    "gal.video": "דמו (וידאו)", "meta.title": "רון קינן | Junior DevOps & Cloud Engineer"
+    "gal.video": "דמו (וידאו)", "meta.title": "רון קינן | Junior DevOps & Cloud Engineer",
+    "dlg.version": "גרסה", "dlg.v2": "V2 · עדכנית", "dlg.v1": "V1 · מקורית", "dlg.v1title": "על גרסה V1", "dlg.improved": "מה השתפר ב-V2"
   }
 };
 
@@ -146,7 +148,7 @@ window.PROJECTS = [
     tags: ["AWS EKS", "Terraform", "Kubernetes", "FastAPI", "React", "Ollama"],
     stack: ["aws", "terraform", "kubernetes", "python", "javascript", "bash", "ollama", "git"],
     facts: [
-      { v: "3", l: { en: "failure scenarios", he: "תרחישי תקלה" } },
+      { v: "5", l: { en: "failure scenarios", he: "תרחישי תקלה" } },
       { v: "2", l: { en: "modes: Demo and Live", he: "מצבים: Demo ו-Live" } },
       { v: "1", l: { en: "script up, 1 script down", he: "סקריפט להקמה ואחד להריסה" } }
     ],
@@ -162,13 +164,13 @@ window.PROJECTS = [
     },
     what: {
       en: [
-        "Pick a failure scenario in the dashboard: out-of-memory kill, a crash loop from a missing Secret, or a Service whose selector matches no pods.",
+        "Pick a failure scenario in the dashboard: out-of-memory kill, a pod stuck on a missing Secret, a Service whose selector matches no pods, a memory leak, or CPU saturation.",
         "The backend applies the faulty manifest to the cluster and collects pod logs, previous-container logs and Kubernetes events.",
         "The RCA engine answers what happened, what the impact is and what the fix is. Ollama writes it when available, and a deterministic rule-based engine is the fallback.",
         "The dashboard shows the faulty manifest next to the corrected one, applies the fix, and a restricted terminal lets you inspect the cluster."
       ],
       he: [
-        "בוחרים תרחיש תקלה בדשבורד: הריגה בגלל חוסר זיכרון, לולאת קריסות בגלל Secret חסר, או Service שה-selector שלו לא תואם אף pod.",
+        "בוחרים תרחיש תקלה בדשבורד: הריגה בגלל חוסר זיכרון, פוד שנתקע בגלל Secret חסר, Service שה-selector שלו לא תואם אף pod, דליפת זיכרון או עומס CPU.",
         "ה-backend מחיל על הקלאסטר את ה-manifest השבור ואוסף לוגים של ה-pod, לוגים של הקונטיינר הקודם ואירועי Kubernetes.",
         "מנוע ה-RCA עונה מה קרה, מה ההשפעה ומה הפתרון. Ollama כותב את הניתוח כשהוא זמין, ומנוע דטרמיניסטי מבוסס חוקים משמש כגיבוי.",
         "הדשבורד מציג את ה-manifest השבור לצד התקין, מחיל את התיקון, וטרמינל מוגבל מאפשר לבדוק את הקלאסטר."
@@ -176,21 +178,88 @@ window.PROJECTS = [
     },
     built: {
       en: [
-        "The whole cluster is created with Terraform on AWS, and one setup script takes it from nothing to a running app. A matching destroy script removes everything so no AWS resources are left behind.",
+        "The whole cluster is created with Terraform on AWS, and one setup script takes it from nothing to a running app. A matching destroy script removes everything and ends with a check that no AWS resources are left behind.",
         "FastAPI control plane, React + Vite + Tailwind dashboard.",
+        "A metrics dashboard: node and pod health, restarts and CPU/memory gauges. In Live mode the numbers come from metrics-server; in Demo mode they are simulated and labelled.",
         "A \"zero-trust\" terminal: every command is checked against a backend allowlist, and only read-only kubectl inspection runs.",
-        "A free public Demo mode with the same code and the same experience, no AWS account needed."
+        "A free public Demo mode with the same code and the same experience, no AWS account needed.",
+        "Automated tests and CI (pytest, CodeQL, Dependabot), and a container that does not run as root."
       ],
       he: [
-        "הקלאסטר כולו מוקם עם Terraform על AWS, וסקריפט התקנה אחד מביא אותו מאפס לאפליקציה רצה. סקריפט הריסה מקביל מסיר הכל, כך שלא נשארים משאבים ב-AWS.",
+        "הקלאסטר כולו מוקם עם Terraform על AWS, וסקריפט התקנה אחד מביא אותו מאפס לאפליקציה רצה. סקריפט הריסה מקביל מסיר הכל ומסיים בבדיקה שלא נשארו משאבים ב-AWS.",
         "שכבת בקרה ב-FastAPI ודשבורד ב-React + Vite + Tailwind.",
+        "דשבורד מטריקות: מצב הצמתים וה-pods, הפעלות מחדש ומדי CPU וזיכרון. ב-Live המספרים מגיעים מ-metrics-server, וב-Demo הם מדומים ומסומנים ככאלה.",
         "טרמינל \"zero-trust\": כל פקודה נבדקת מול allowlist בצד השרת, ורק בדיקות kubectl לקריאה בלבד רצות.",
-        "מצב Demo ציבורי וחינמי עם אותו קוד ואותה חוויה, בלי חשבון AWS."
+        "מצב Demo ציבורי וחינמי עם אותו קוד ואותה חוויה, בלי חשבון AWS.",
+        "בדיקות אוטומטיות ו-CI (pytest, CodeQL, Dependabot), וקונטיינר שלא רץ כ-root."
       ]
     },
     hard: {
       en: "Bridging a button click in the UI to what actually happens inside the pods. At first, triggering an incident did not really happen in the background. Connecting the real pod state to the website and dashboard, including the problem and the fix flow, was the real work. The dashboard also had broken UI states I had to clean up.",
       he: "לגשר בין לחיצת כפתור בממשק לבין מה שבאמת קורה בתוך ה-pods. בהתחלה הפעלת תקלה לא קרתה באמת ברקע. החיבור בין מצב ה-pods האמיתי לאתר ולדשבורד, כולל זרימת הבעיה והתיקון, היה העבודה האמיתית. בנוסף היו מצבי ממשק שבורים בדשבורד שנאלצתי לנקות."
+    },
+    v1note: {
+      en: "This is the first version I published. It is no longer updated, and it stays here to show how the project grew.",
+      he: "זו הגרסה הראשונה שפרסמתי. היא כבר לא מתעדכנת, והיא נשארת כאן כדי להראות איך הפרויקט גדל."
+    },
+    improved: {
+      en: [
+        "A metrics dashboard with CPU, memory, pods and restarts (real numbers from metrics-server in Live mode).",
+        "Five incidents instead of three: I added a memory leak and CPU saturation.",
+        "Safer setup: the EKS endpoint is limited to my own IP range, and the script asks before creating anything that costs money.",
+        "Safer destroy: it only removes what the simulator created, and ends with a PASS/FAIL check that nothing is left.",
+        "Automated tests, CodeQL and a container that does not run as root. The Repo Checker score on this project went from 68 to 92.",
+        "I fixed a wrong assumption: a missing Secret leaves the pod in CreateContainerConfigError, not in CrashLoopBackOff.",
+        "Light and dark theme, and a mobile layout."
+      ],
+      he: [
+        "דשבורד מטריקות עם CPU, זיכרון, pods והפעלות מחדש (מספרים אמיתיים מ-metrics-server במצב Live).",
+        "חמישה תרחישים במקום שלושה: הוספתי דליפת זיכרון ועומס CPU.",
+        "התקנה בטוחה יותר: ה-endpoint של EKS מוגבל לטווח ה-IP שלי, והסקריפט שואל לפני שהוא יוצר משהו שעולה כסף.",
+        "הריסה בטוחה יותר: היא מסירה רק את מה שהסימולטור יצר, ומסתיימת בבדיקת PASS/FAIL שלא נשאר כלום.",
+        "בדיקות אוטומטיות, CodeQL וקונטיינר שלא רץ כ-root. ציון ה-Repo Checker של הפרויקט עלה מ-68 ל-92.",
+        "תיקנתי הנחה לא נכונה: Secret חסר משאיר את ה-pod ב-CreateContainerConfigError ולא ב-CrashLoopBackOff.",
+        "ערכת נושא בהירה וכהה, ותצוגת מובייל."
+      ]
+    },
+    legacy: {
+      links: {},
+      coldStart: false,
+      what: {
+        en: [
+          "Pick a failure scenario in the dashboard: out-of-memory kill, a crash loop from a missing Secret, or a Service whose selector matches no pods.",
+          "The backend applies the faulty manifest to the cluster and collects pod logs, previous-container logs and Kubernetes events.",
+          "The RCA engine answers what happened, what the impact is and what the fix is. Ollama writes it when available, and a deterministic rule-based engine is the fallback.",
+          "The dashboard shows the faulty manifest next to the corrected one, applies the fix, and a restricted terminal lets you inspect the cluster."
+        ],
+        he: [
+          "בוחרים תרחיש תקלה בדשבורד: הריגה בגלל חוסר זיכרון, לולאת קריסות בגלל Secret חסר, או Service שה-selector שלו לא תואם אף pod.",
+          "ה-backend מחיל על הקלאסטר את ה-manifest השבור ואוסף לוגים של ה-pod, לוגים של הקונטיינר הקודם ואירועי Kubernetes.",
+          "מנוע ה-RCA עונה מה קרה, מה ההשפעה ומה הפתרון. Ollama כותב את הניתוח כשהוא זמין, ומנוע דטרמיניסטי מבוסס חוקים משמש כגיבוי.",
+          "הדשבורד מציג את ה-manifest השבור לצד התקין, מחיל את התיקון, וטרמינל מוגבל מאפשר לבדוק את הקלאסטר."
+        ]
+      },
+      built: {
+        en: [
+          "The whole cluster is created with Terraform on AWS, and one setup script takes it from nothing to a running app. A matching destroy script removes everything so no AWS resources are left behind.",
+          "FastAPI control plane, React + Vite + Tailwind dashboard.",
+          "A \"zero-trust\" terminal: every command is checked against a backend allowlist, and only read-only kubectl inspection runs.",
+          "A free public Demo mode with the same code and the same experience, no AWS account needed."
+        ],
+        he: [
+          "הקלאסטר כולו מוקם עם Terraform על AWS, וסקריפט התקנה אחד מביא אותו מאפס לאפליקציה רצה. סקריפט הריסה מקביל מסיר הכל, כך שלא נשארים משאבים ב-AWS.",
+          "שכבת בקרה ב-FastAPI ודשבורד ב-React + Vite + Tailwind.",
+          "טרמינל \"zero-trust\": כל פקודה נבדקת מול allowlist בצד השרת, ורק בדיקות kubectl לקריאה בלבד רצות.",
+          "מצב Demo ציבורי וחינמי עם אותו קוד ואותה חוויה, בלי חשבון AWS."
+        ]
+      },
+      media: [
+        { type: "img", src: "img/eks-v1-dashboard-overview.webp", cap: "dashboard-overview.png · V1" },
+        { type: "img", src: "img/eks-v1-incident-lab.webp", cap: "incident-lab.png · V1" },
+        { type: "img", src: "img/eks-v1-ai-rca-result.webp", cap: "ai-rca-result.png · V1" },
+        { type: "img", src: "img/eks-v1-zero-trust-terminal.webp", cap: "zero-trust-terminal.png · V1" },
+        { type: "svg", src: "img/eks-v1-architecture.svg", cap: "architecture.svg · V1" }
+      ]
     },
     media: [
       { type: "img", src: "img/eks-dashboard-overview.webp", cap: "dashboard-overview.png · live cluster status" },
@@ -223,8 +292,8 @@ window.PROJECTS = [
       repo: "https://github.com/Kinanw38/devops-repo-checker"
     },
     problem: {
-      en: "I ran it on my own EKS project and it scored 68 out of 100: the container ran as root and the repo had no automated tests. Useful feedback, and exactly why I built a tool for it.",
-      he: "הרצתי אותו על פרויקט ה-EKS שלי וקיבלתי 68 מתוך 100: הקונטיינר רץ כ-root ולא היו בדיקות אוטומטיות בריפו. פידבק שימושי, ובדיוק בגלל זה בניתי כלי."
+      en: "I ran it on my own EKS project and it scored 68 out of 100: the container ran as root and the repo had no automated tests. I fixed what it found and ran it again: 92. Useful feedback, and exactly why I built a tool for it.",
+      he: "הרצתי אותו על פרויקט ה-EKS שלי וקיבלתי 68 מתוך 100: הקונטיינר רץ כ-root ולא היו בדיקות אוטומטיות בריפו. תיקנתי את מה שהוא מצא והרצתי שוב: 92. פידבק שימושי, ובדיוק בגלל זה בניתי כלי."
     },
     what: {
       en: [

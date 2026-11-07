@@ -1,0 +1,792 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="1400"
+  height="780"
+  viewBox="0 0 1400 780"
+  fill="none"
+>
+  <defs>
+    <linearGradient id="canvas" x1="0" y1="0" x2="1400" y2="780">
+      <stop offset="0%" stop-color="#09090B"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+
+    <marker
+      id="arrow-gray"
+      viewBox="0 0 10 10"
+      refX="8"
+      refY="5"
+      markerWidth="7"
+      markerHeight="7"
+      orient="auto"
+    >
+      <path d="M0 0L10 5L0 10Z" fill="#64748B"/>
+    </marker>
+
+    <marker
+      id="arrow-blue"
+      viewBox="0 0 10 10"
+      refX="8"
+      refY="5"
+      markerWidth="7"
+      markerHeight="7"
+      orient="auto"
+    >
+      <path d="M0 0L10 5L0 10Z" fill="#60A5FA"/>
+    </marker>
+
+    <marker
+      id="arrow-green"
+      viewBox="0 0 10 10"
+      refX="8"
+      refY="5"
+      markerWidth="7"
+      markerHeight="7"
+      orient="auto"
+    >
+      <path d="M0 0L10 5L0 10Z" fill="#34D399"/>
+    </marker>
+
+    <style>
+      .title {
+        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+        font-size: 28px;
+        font-weight: 700;
+        fill: #F4F4F5;
+      }
+
+      .subtitle {
+        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+        font-size: 14px;
+        fill: #A1A1AA;
+      }
+
+      .section {
+        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        fill: #E4E4E7;
+      }
+
+      .card-title {
+        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        fill: #F4F4F5;
+      }
+
+      .card-text {
+        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+        font-size: 12px;
+        fill: #CBD5E1;
+      }
+
+      .label {
+        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+        font-size: 11px;
+        fill: #94A3B8;
+      }
+
+      .mode {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1.2px;
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect
+    width="1400"
+    height="780"
+    rx="16"
+    fill="url(#canvas)"
+  />
+
+  <rect
+    x="1"
+    y="1"
+    width="1398"
+    height="778"
+    rx="15"
+    stroke="#27272A"
+    stroke-width="2"
+  />
+
+  <!-- Header -->
+  <text x="64" y="62" class="title">
+    EKS Incident Simulator with AI Diagnostics
+  </text>
+
+  <text x="64" y="90" class="subtitle">
+    Incident injection, Kubernetes telemetry, root-cause analysis, and remediation
+  </text>
+
+  <!-- Main request arrows -->
+  <path
+    d="M270 191H350"
+    stroke="#60A5FA"
+    stroke-width="2"
+    marker-end="url(#arrow-blue)"
+  />
+
+  <path
+    d="M630 191H710"
+    stroke="#60A5FA"
+    stroke-width="2"
+    marker-end="url(#arrow-blue)"
+  />
+
+  <!-- Top cards -->
+
+  <!-- User Browser -->
+  <rect
+    x="64"
+    y="130"
+    width="206"
+    height="122"
+    rx="12"
+    fill="#18181B"
+    stroke="#3F3F46"
+    stroke-width="2"
+  />
+
+  <circle
+    cx="91"
+    cy="159"
+    r="8"
+    fill="#60A5FA"
+  />
+
+  <text
+    x="111"
+    y="164"
+    class="card-title"
+  >
+    User Browser
+  </text>
+
+  <text
+    x="88"
+    y="194"
+    class="card-text"
+  >
+    React dashboard
+  </text>
+
+  <text
+    x="88"
+    y="216"
+    class="card-text"
+  >
+    Incident controls
+  </text>
+
+  <text
+    x="88"
+    y="238"
+    class="card-text"
+  >
+    Live status visibility
+  </text>
+
+  <!-- React / Vite Frontend -->
+  <rect
+    x="350"
+    y="130"
+    width="280"
+    height="122"
+    rx="12"
+    fill="#111827"
+    stroke="#2563EB"
+    stroke-width="2"
+  />
+
+  <circle
+    cx="378"
+    cy="159"
+    r="8"
+    fill="#60A5FA"
+  />
+
+  <text
+    x="398"
+    y="164"
+    class="card-title"
+  >
+    React / Vite Frontend
+  </text>
+
+  <text
+    x="378"
+    y="194"
+    class="card-text"
+  >
+    Overview and incident lab
+  </text>
+
+  <text
+    x="378"
+    y="216"
+    class="card-text"
+  >
+    AI RCA and remediation UI
+  </text>
+
+  <text
+    x="378"
+    y="238"
+    class="card-text"
+  >
+    Zero-Trust terminal
+  </text>
+
+  <!-- FastAPI Control Plane -->
+  <rect
+    x="710"
+    y="130"
+    width="280"
+    height="156"
+    rx="12"
+    fill="#172554"
+    stroke="#4F46E5"
+    stroke-width="2"
+  />
+
+  <circle
+    cx="738"
+    cy="159"
+    r="8"
+    fill="#818CF8"
+  />
+
+  <text
+    x="758"
+    y="164"
+    class="card-title"
+  >
+    FastAPI Control Plane
+  </text>
+
+  <text
+    x="738"
+    y="194"
+    class="card-text"
+  >
+    Scenario orchestration
+  </text>
+
+  <text
+    x="738"
+    y="216"
+    class="card-text"
+  >
+    Server-side command allowlist
+  </text>
+
+  <text
+    x="738"
+    y="238"
+    class="card-text"
+  >
+    Telemetry collection
+  </text>
+
+  <text
+    x="738"
+    y="260"
+    class="card-text"
+  >
+    Remediation endpoints
+  </text>
+
+  <!-- RCA Engine -->
+  <rect
+    x="1070"
+    y="130"
+    width="266"
+    height="156"
+    rx="12"
+    fill="#18181B"
+    stroke="#52525B"
+    stroke-width="2"
+  />
+
+  <circle
+    cx="1098"
+    cy="159"
+    r="8"
+    fill="#F59E0B"
+  />
+
+  <text
+    x="1118"
+    y="164"
+    class="card-title"
+  >
+    RCA Engine
+  </text>
+
+  <text
+    x="1098"
+    y="194"
+    class="card-text"
+  >
+    Ollama LLM when available
+  </text>
+
+  <text
+    x="1098"
+    y="216"
+    class="card-text"
+  >
+    Structured JSON analysis
+  </text>
+
+  <text
+    x="1098"
+    y="238"
+    class="card-text"
+  >
+    Deterministic fallback
+  </text>
+
+  <text
+    x="1098"
+    y="260"
+    class="card-text"
+  >
+    Root cause and fix guidance
+  </text>
+
+  <!-- Top flow labels -->
+  <text
+    x="286"
+    y="181"
+    class="label"
+  >
+    HTTPS
+  </text>
+
+  <text
+    x="646"
+    y="181"
+    class="label"
+  >
+    REST API
+  </text>
+
+  <!-- Runtime section -->
+  <text
+    x="64"
+    y="360"
+    class="section"
+  >
+    Runtime Integration
+  </text>
+
+  <line
+    x1="64"
+    y1="377"
+    x2="1336"
+    y2="377"
+    stroke="#27272A"
+    stroke-width="2"
+  />
+
+  <!-- Runtime connection lines -->
+  <!-- Demo uses a separate branch from the left side of FastAPI. -->
+  <!-- Live uses the center branch. The paths do not cross. -->
+
+  <!-- FastAPI to Demo Mode -->
+  <path
+    d="M790 286V315H247V402"
+    stroke="#60A5FA"
+    stroke-width="2"
+    stroke-dasharray="6 6"
+    marker-end="url(#arrow-blue)"
+  />
+
+  <!-- FastAPI to Live Mode -->
+  <path
+    d="M850 286V342H655V402"
+    stroke="#34D399"
+    stroke-width="2"
+    stroke-dasharray="6 6"
+    marker-end="url(#arrow-green)"
+  />
+
+  <!-- Terraform/AWS to RCA Engine -->
+  <path
+    d="M1108 410V330H1203V286"
+    stroke="#64748B"
+    stroke-width="2"
+    stroke-dasharray="6 6"
+    marker-end="url(#arrow-gray)"
+  />
+
+  <!-- Connection labels -->
+  <text
+    x="300"
+    y="303"
+    class="label"
+  >
+    demo provider
+  </text>
+
+  <text
+    x="680"
+    y="330"
+    class="label"
+  >
+    live adapter
+  </text>
+
+  <text
+    x="1132"
+    y="322"
+    class="label"
+  >
+    telemetry
+  </text>
+
+  <!-- Demo Mode -->
+  <rect
+    x="64"
+    y="410"
+    width="366"
+    height="176"
+    rx="12"
+    fill="#172554"
+    stroke="#3B82F6"
+    stroke-width="2"
+  />
+
+  <text
+    x="90"
+    y="430"
+    class="mode"
+    fill="#93C5FD"
+  >
+    DEMO MODE
+  </text>
+
+  <text
+    x="90"
+    y="462"
+    class="card-title"
+  >
+    Public Hosted Demo
+  </text>
+
+  <text
+    x="90"
+    y="494"
+    class="card-text"
+  >
+    Vercel frontend + Render backend
+  </text>
+
+  <text
+    x="90"
+    y="518"
+    class="card-text"
+  >
+    Deterministic mock responses
+  </text>
+
+  <text
+    x="90"
+    y="542"
+    class="card-text"
+  >
+    No AWS credentials required
+  </text>
+
+  <text
+    x="90"
+    y="566"
+    class="card-text"
+  >
+    No real cluster resources modified
+  </text>
+
+  <!-- Live Mode -->
+  <rect
+    x="472"
+    y="410"
+    width="366"
+    height="176"
+    rx="12"
+    fill="#052E2B"
+    stroke="#10B981"
+    stroke-width="2"
+  />
+
+  <text
+    x="498"
+    y="430"
+    class="mode"
+    fill="#6EE7B7"
+  >
+    LIVE MODE
+  </text>
+
+  <text
+    x="498"
+    y="462"
+    class="card-title"
+  >
+    AWS / EKS Integration
+  </text>
+
+  <text
+    x="498"
+    y="494"
+    class="card-text"
+  >
+    Local kubeconfig or in-cluster access
+  </text>
+
+  <text
+    x="498"
+    y="518"
+    class="card-text"
+  >
+    Real pods, nodes, logs, and events
+  </text>
+
+  <text
+    x="498"
+    y="542"
+    class="card-text"
+  >
+    Fault manifests applied to Kubernetes
+  </text>
+
+  <text
+    x="498"
+    y="566"
+    class="card-text"
+  >
+    Remediation applied to live workloads
+  </text>
+
+  <!-- Infrastructure -->
+  <rect
+    x="880"
+    y="410"
+    width="456"
+    height="176"
+    rx="12"
+    fill="#18181B"
+    stroke="#D97706"
+    stroke-width="2"
+  />
+
+  <text
+    x="906"
+    y="430"
+    class="mode"
+    fill="#FBBF24"
+  >
+    INFRASTRUCTURE
+  </text>
+
+  <text
+    x="906"
+    y="462"
+    class="card-title"
+  >
+    Terraform-managed AWS
+  </text>
+
+  <text
+    x="906"
+    y="494"
+    class="card-text"
+  >
+    VPC networking and security groups
+  </text>
+
+  <text
+    x="906"
+    y="518"
+    class="card-text"
+  >
+    Amazon EKS control plane and worker nodes
+  </text>
+
+  <text
+    x="906"
+    y="542"
+    class="card-text"
+  >
+    Kubernetes workloads and incident manifests
+  </text>
+
+  <text
+    x="906"
+    y="566"
+    class="card-text"
+  >
+    Lifecycle controlled by setup and destroy scripts
+  </text>
+
+  <!-- Shared workflow -->
+  <text
+    x="64"
+    y="635"
+    class="section"
+  >
+    Shared Incident-Response Workflow
+  </text>
+
+  <line
+    x1="64"
+    y1="652"
+    x2="1336"
+    y2="652"
+    stroke="#27272A"
+    stroke-width="2"
+  />
+
+  <!-- Workflow arrows -->
+  <path
+    d="M300 710H360"
+    stroke="#64748B"
+    stroke-width="2"
+    marker-end="url(#arrow-gray)"
+  />
+
+  <path
+    d="M600 710H660"
+    stroke="#64748B"
+    stroke-width="2"
+    marker-end="url(#arrow-gray)"
+  />
+
+  <path
+    d="M900 710H960"
+    stroke="#64748B"
+    stroke-width="2"
+    marker-end="url(#arrow-gray)"
+  />
+
+  <!-- Fault Scenario -->
+  <rect
+    x="64"
+    y="680"
+    width="236"
+    height="60"
+    rx="10"
+    fill="#27272A"
+    stroke="#52525B"
+  />
+
+  <text
+    x="182"
+    y="701"
+    text-anchor="middle"
+    class="card-title"
+  >
+    Fault Scenario
+  </text>
+
+  <text
+    x="182"
+    y="720"
+    text-anchor="middle"
+    class="label"
+  >
+    OOM / CrashLoop / Routing
+  </text>
+
+  <!-- Telemetry -->
+  <rect
+    x="360"
+    y="680"
+    width="240"
+    height="60"
+    rx="10"
+    fill="#27272A"
+    stroke="#52525B"
+  />
+
+  <text
+    x="480"
+    y="701"
+    text-anchor="middle"
+    class="card-title"
+  >
+    Telemetry
+  </text>
+
+  <text
+    x="480"
+    y="720"
+    text-anchor="middle"
+    class="label"
+  >
+    Logs / events / workload state
+  </text>
+
+  <!-- Diagnosis -->
+  <rect
+    x="660"
+    y="680"
+    width="240"
+    height="60"
+    rx="10"
+    fill="#27272A"
+    stroke="#52525B"
+  />
+
+  <text
+    x="780"
+    y="701"
+    text-anchor="middle"
+    class="card-title"
+  >
+    Diagnosis
+  </text>
+
+  <text
+    x="780"
+    y="720"
+    text-anchor="middle"
+    class="label"
+  >
+    Ollama or expert fallback
+  </text>
+
+  <!-- Remediation -->
+  <rect
+    x="960"
+    y="680"
+    width="240"
+    height="60"
+    rx="10"
+    fill="#27272A"
+    stroke="#52525B"
+  />
+
+  <text
+    x="1080"
+    y="701"
+    text-anchor="middle"
+    class="card-title"
+  >
+    Remediation
+  </text>
+
+  <text
+    x="1080"
+    y="720"
+    text-anchor="middle"
+    class="label"
+  >
+    Fix manifest and reconcile
+  </text>
+</svg>
