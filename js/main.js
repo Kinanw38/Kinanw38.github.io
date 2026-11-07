@@ -127,9 +127,14 @@
     if (m.type === "video") return '<video src="' + m.src + '.mp4" poster="' + m.poster + '" controls muted loop playsinline autoplay></video>';
     return '<img src="' + m.src + '" alt="' + esc(m.cap || "") + '">';
   }
-  function openCase(id) {
-    var p = byId(id); if (!p || !p.media) return;
-    currentId = id; lastFocus = D.activeElement;
+  var caseVer = "v2";
+  function openCase(id, ver) {
+    var base = byId(id); if (!base || !base.media) return;
+    var wasOpen = dlg.open;
+    if (ver) caseVer = ver; else if (!wasOpen) caseVer = "v2";
+    var legacy = caseVer === "v1" && base.legacy;
+    var p = legacy ? Object.assign({}, base, base.legacy) : base;
+    currentId = id; if (!wasOpen) lastFocus = D.activeElement;
     D.getElementById("dlgPath").textContent = "~/projects/" + p.id;
     var cols1 = [], cols2 = [];
     if (p.what) cols1.push(blk("dlg.what", ul(L(p.what))));
@@ -141,6 +146,9 @@
       '<header><h2 id="dlgTitle">' + esc(T(p.name)) + (p.sub ? '<span class="sub">' + esc(T(p.sub)) + "</span>" : "") + "</h2>" +
       (p.kind ? '<span class="kind-pill mono">' + esc(tt("kind." + p.kind)) + "</span>" : "") +
       '<p class="lede">' + esc(T(p.one)) + "</p></header>" +
+      (base.legacy ? '<div class="verbar"><span class="mono">' + esc(tt("dlg.version")) + '</span><div class="seg" role="group" aria-label="' + esc(tt("dlg.version")) + '">' +
+        ["v2", "v1"].map(function (v) { return '<button class="segb" type="button" data-ver="' + v + '" aria-pressed="' + (caseVer === v) + '">' + esc(tt("dlg." + v)) + "</button>"; }).join("") + "</div></div>" : "") +
+      (legacy ? blk("dlg.v1title", "<p>" + md(T(base.v1note)) + "</p>" + (base.improved ? '<h4 class="subh">' + esc(tt("dlg.improved")) + "</h4>" + ul(L(base.improved)) : ""), "callout") : "") +
       ((p.links && (p.links.demo || p.links.repo)) ? '<div class="dlg-links">' + linkBtns(p, false) + "</div>" : "") +
       (p.coldStart ? '<p class="note">' + esc(tt("dlg.cold")) + "</p>" : "") +
       '<div class="gal"><div class="gal-main" id="galMain">' + mainMedia(p.media[0]) + '</div><div class="gal-cap mono" id="galCap">' + esc(p.media[0].cap || "") + "</div>" +
@@ -151,6 +159,9 @@
       (p.problem ? blk("dlg.problem", "<p>" + md(T(p.problem)) + "</p>", "callout") : "") +
       (cols1.length ? '<div class="cols">' + cols1.join("") + "</div>" : "") +
       '<div class="cols">' + cols2.join("") + "</div>";
+    dlgBody.querySelectorAll(".segb").forEach(function (b) {
+      b.addEventListener("click", function () { openCase(id, b.getAttribute("data-ver")); });
+    });
     dlgBody.querySelectorAll(".th").forEach(function (b) {
       b.addEventListener("click", function () {
         var i = +b.getAttribute("data-i"), m = p.media[i];
@@ -159,13 +170,16 @@
         dlgBody.querySelectorAll(".th").forEach(function (o) { o.setAttribute("aria-current", o === b); });
       });
     });
-    if (typeof dlg.showModal === "function") dlg.showModal(); else dlg.setAttribute("open", "");
-    dlg.scrollTop = 0; D.body.style.overflow = "hidden";
+    if (!wasOpen) {
+      if (typeof dlg.showModal === "function") dlg.showModal(); else dlg.setAttribute("open", "");
+      dlg.scrollTop = 0;
+    }
+    D.body.style.overflow = "hidden";
     try { history.replaceState(null, "", "#" + id); } catch (e) {}
   }
   function closeCase() { if (dlg.open) dlg.close(); }
   dlg.addEventListener("close", function () {
-    D.body.style.overflow = ""; dlgBody.innerHTML = ""; currentId = null;
+    D.body.style.overflow = ""; dlgBody.innerHTML = ""; currentId = null; caseVer = "v2";
     try { history.replaceState(null, "", location.pathname + location.search + "#projects"); } catch (e) {}
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   });
