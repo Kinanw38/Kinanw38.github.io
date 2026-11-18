@@ -15,7 +15,7 @@ window.I18N = {
     "nav.play": "Game", "play.kicker": "Free browser game",
     "play.lead": "Fix real cloud and DevOps incidents, one level at a time.",
     "play.sub": "You are the on-call engineer. Find the mistake, fix it, and watch the night turn into dawn.",
-    "play.c1": "8 levels", "play.c2": "HE / EN", "play.c3": "No signup", "play.now": "Play now", "play.code": "View code",
+    "play.c1": "8 levels", "play.c2": "HE / EN", "play.c3": "No signup", "play.now": "Play now",
     "play.alt": "Screen recording of the Fix My Cloud game: a firewall rule that is open to the world is found and fixed, then the night scene turns to dawn.",
     "nav.projects": "Projects", "nav.approach": "Approach", "nav.about": "About", "nav.contact": "Contact",
     "hero.status": "Open to work · Junior DevOps & Cloud Engineer",
@@ -63,7 +63,7 @@ window.I18N = {
     "nav.play": "המשחק", "play.kicker": "משחק דפדפן חינמי",
     "play.lead": "מתקנים תקלות אמיתיות בענן וב-DevOps, שלב אחרי שלב.",
     "play.sub": "אתה המהנדס התורן. מוצאים את הטעות, מתקנים אותה, ורואים את הלילה הופך לשחר.",
-    "play.c1": "8 שלבים", "play.c2": "HE / EN", "play.c3": "בלי הרשמה", "play.now": "שחק עכשיו", "play.code": "צפה בקוד",
+    "play.c1": "8 שלבים", "play.c2": "HE / EN", "play.c3": "בלי הרשמה", "play.now": "שחק עכשיו",
     "play.alt": "הקלטת מסך של המשחק Fix My Cloud: מוצאים ומתקנים חוק חומת אש שפתוח לכולם, והלילה הופך לשחר.",
     "nav.projects": "פרויקטים", "nav.approach": "איך אני עובד", "nav.about": "עליי", "nav.contact": "יצירת קשר",
     "hero.status": "פתוח להצעות · Junior DevOps & Cloud Engineer",
@@ -644,3 +644,69 @@ window.PROJECTS = [
     links: {}
   }
 ];
+
+/* ---------------------------------------------------------------------
+   GAME: the Fix My Cloud case study. Same shape as a project, but it has
+   its own section (#play), so it is not part of PROJECTS.
+   --------------------------------------------------------------------- */
+window.GAME = {
+  id: "fix-my-cloud",
+  year: "2026",
+  name: { en: "Fix My Cloud", he: "Fix My Cloud" },
+  one: {
+    en: "A free browser game where you fix real cloud and DevOps incidents, one level at a time.",
+    he: "משחק דפדפן חינמי שבו מתקנים תקלות אמיתיות בענן וב-DevOps, שלב אחרי שלב."
+  },
+  tags: ["HTML", "CSS", "JavaScript (ES modules)", "Node.js tests", "Playwright", "GitHub Actions", "GitHub Pages"],
+  demoLabel: "play.now",
+  links: { demo: "https://kinanw38.github.io/fix-my-cloud/", repo: "https://github.com/Kinanw38/fix-my-cloud" },
+  media: [
+    { type: "video", src: "img/fmc-demo", poster: "img/fmc-demo-poster.webp", cap: { en: "short demo · find the bad line, fix it, the night turns to dawn", he: "דמו קצר · מוצאים את השורה הבעייתית, מתקנים, והלילה הופך לשחר" } },
+    { type: "img", src: "img/fmc-home.webp", cap: { en: "the opening page, with an animated example", he: "דף הפתיחה, עם דוגמה מונפשת" } },
+    { type: "img", src: "img/fmc-briefing.webp", cap: { en: "every level starts with a short briefing", he: "כל שלב מתחיל בתדריך קצר" } },
+    { type: "img", src: "img/fmc-level.webp", cap: { en: "find the line, then pick a fix or write your own", he: "מוצאים את השורה, ואז בוחרים תיקון או כותבים בעצמכם" } },
+    { type: "img", src: "img/fmc-fixed.webp", cap: { en: "door locked: the fix works", he: "הדלת נעולה: התיקון עובד" } }
+  ],
+  problem: {
+    en: "Security mistakes in cloud and CI are easy to read about and hard to feel. I wanted a short, safe place to meet one, fix it, and see why it was dangerous, with no signup and no cloud account.",
+    he: "טעויות אבטחה בענן וב-CI קל לקרוא עליהן וקשה להרגיש אותן. רציתי מקום קצר ובטוח לפגוש טעות כזו, לתקן אותה ולראות למה היא הייתה מסוכנת, בלי הרשמה ובלי חשבון ענן."
+  },
+  what: {
+    en: [
+      "**8 short levels**: 2 practice levels and 6 incidents, such as a firewall open to the world, a key written in code, and a CI script that runs a stranger's text.",
+      "Each level: read a short briefing, find the bad line in a small config file, fix it, run the checks.",
+      "If the fix is right the door locks and the night turns to dawn. Then you see your change as a pull request and what you learned.",
+      "Hebrew and English with right-to-left layout, on phone and desktop. 100% in the browser: no server, no tracking, no cookies."
+    ],
+    he: [
+      "**8 שלבים קצרים**: 2 שלבי תרגול ו-6 תקריות, למשל חומת אש פתוחה לכולם, מפתח שנכתב בקוד, וסקריפט CI שמריץ טקסט של זר.",
+      "בכל שלב: קוראים תדריך קצר, מוצאים את השורה הבעייתית בקובץ קטן, מתקנים ומריצים את הבדיקות.",
+      "אם התיקון נכון, הדלת ננעלת והלילה הופך לשחר. אחר כך רואים את השינוי כ-pull request ומה למדנו.",
+      "עברית ואנגלית עם פריסה מימין לשמאל, בטלפון ובמחשב. הכל רץ בדפדפן: בלי שרת, בלי מעקב ובלי עוגיות."
+    ]
+  },
+  built: {
+    en: [
+      "A **rules engine** (plain functions, no DOM) that checks the player's code, so it can accept any correct fix and not one exact answer.",
+      "One file per level with the code, hints, fix choices and the lesson, so adding a level is simple.",
+      "Plain **HTML, CSS and JavaScript modules**: no framework and no runtime dependencies. A drawing for each level that fits its problem.",
+      "**Tests on every push**: unit tests, a privacy scan, Chromium and Firefox end-to-end tests, and accessibility checks (Playwright and axe).",
+      "**CI/CD with GitHub Actions**: deploy to GitHub Pages only after the tests pass, then check that the live site answers."
+    ],
+    he: [
+      "**מנוע חוקים** (פונקציות פשוטות, בלי DOM) שבודק את הקוד של השחקן, כך שהוא יכול לקבל כל תיקון נכון ולא רק תשובה מדויקת אחת.",
+      "קובץ אחד לכל שלב עם הקוד, הרמזים, אפשרויות התיקון והלקח, כך שקל להוסיף שלב.",
+      "**HTML, CSS ומודולי JavaScript** פשוטים: בלי framework ובלי תלויות בזמן ריצה. לכל שלב איור שמתאים לבעיה שלו.",
+      "**בדיקות בכל push**: בדיקות יחידה, סריקת פרטיות, בדיקות end-to-end ב-Chromium וב-Firefox, ובדיקות נגישות (Playwright ו-axe).",
+      "**CI/CD עם GitHub Actions**: פריסה ל-GitHub Pages רק אחרי שהבדיקות עוברות, ואז בדיקה שהאתר החי עונה."
+    ]
+  },
+  hard: {
+    en: "Making the fix feel real. With two options the answer is obvious, so each fix has 3 to 5 plausible options, shuffled every attempt, plus a \"write it yourself\" mode where any correct fix is accepted. Getting the right-to-left Hebrew layout and the night-to-dawn animation to work well on a phone was the second part.",
+    he: "לגרום לתיקון להרגיש אמיתי. כשיש שתי אפשרויות התשובה ברורה, אז לכל תיקון יש 3 עד 5 אפשרויות הגיוניות שמתערבבות בכל ניסיון, ובנוסף מצב \"כתוב בעצמך\" שבו מתקבל כל תיקון נכון. החלק השני היה לגרום לפריסה העברית מימין לשמאל ולאנימציית הלילה-שחר לעבוד טוב בטלפון."
+  },
+  next: {
+    en: ["Make the Safari (WebKit) tests blocking in CI. Today they run but do not block.", "More incident levels."],
+    he: ["להפוך את בדיקות Safari (WebKit) לחוסמות ב-CI. כרגע הן רצות אבל לא חוסמות.", "עוד שלבי תקריות."]
+  }
+};

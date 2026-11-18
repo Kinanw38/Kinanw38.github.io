@@ -460,7 +460,7 @@ main,header.top,footer{transition:opacity .18s ease}
 /* ---------- game section ---------- */
 .play-sec{padding-top:clamp(40px,6vw,72px)}
 .play-sec .sec-head{margin-bottom:clamp(18px,3vw,28px)}
-.play{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);background:var(--surface);border:1.5px solid var(--ink);border-radius:var(--radius);box-shadow:8px 8px 0 var(--shadow);overflow:hidden}
+.play{cursor:pointer;transition:transform .18s,box-shadow .18s;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);background:var(--surface);border:1.5px solid var(--ink);border-radius:var(--radius);box-shadow:8px 8px 0 var(--shadow);overflow:hidden}
 .play-text{padding:clamp(20px,3vw,32px);display:flex;flex-direction:column;gap:14px;justify-content:center}
 .play-kicker{font-size:12px;color:var(--accent);letter-spacing:.06em;text-transform:uppercase}
 [lang="he"] .play-kicker{font-family:var(--sans);font-size:13px;text-transform:none;letter-spacing:0}
@@ -478,3 +478,6 @@ main,header.top,footer{transition:opacity .18s ease}
 }
 .play-chips{direction:inherit}
 [dir="rtl"] .play-chips{justify-content:flex-start}
+.play:hover{transform:translate(-3px,-3px);box-shadow:11px 11px 0 var(--shadow)}
+.play .btn{cursor:pointer}
+@media (prefers-reduced-motion:reduce){.play{transition:none}.play:hover{transform:none}}

@@ -16,7 +16,8 @@
   var ICON_GH = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>';
   var ICON_EXT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>';
 
-  function byId(id) { return PROJECTS.filter(function (p) { return p.id === id; })[0]; }
+  function byId(id) { return id === GAME.id ? GAME : PROJECTS.filter(function (p) { return p.id === id; })[0]; }
+  function capOf(m) { return (m && m.cap && typeof m.cap === "object") ? T(m.cap) : ((m && m.cap) || ""); }
   function techCount(id) { return PROJECTS.filter(function (p) { return p.stack && p.stack.indexOf(id) > -1; }).length; }
   function techLabel(id) { var l = id; TECH.forEach(function (g) { g.items.forEach(function (i) { if (i.id === id) l = i.label; }); }); return l; }
   function chipsHtml(tags) { return tags.map(function (t) { return '<span class="chip">' + esc(t) + "</span>"; }).join(""); }
@@ -79,7 +80,7 @@
   }
   function linkBtns(p, small) {
     var out = "", s = small ? " sm" : "";
-    if (p.links && p.links.demo) out += '<a class="btn primary' + s + '" href="' + p.links.demo + '" target="_blank" rel="noopener">' + esc(tt("feat.demo")) + ICON_EXT + "</a>";
+    if (p.links && p.links.demo) out += '<a class="btn primary' + s + '" href="' + p.links.demo + '" target="_blank" rel="noopener">' + esc(tt(p.demoLabel || "feat.demo")) + ICON_EXT + "</a>";
     if (p.links && p.links.repo) out += '<a class="btn' + s + '" href="' + p.links.repo + '" target="_blank" rel="noopener">' + ICON_GH + "<span>" + esc(tt("feat.repo")) + "</span></a>";
     return out;
   }
@@ -127,7 +128,7 @@
   function blk(titleKey, inner, cls) { return '<div class="blk' + (cls ? " " + cls : "") + '"><h3>' + esc(tt(titleKey)) + "</h3>" + inner + "</div>"; }
   function mainMedia(m) {
     if (m.type === "video") return '<video src="' + m.src + '.mp4" poster="' + m.poster + '" controls muted loop playsinline autoplay></video>';
-    return '<img src="' + m.src + '" alt="' + esc(m.cap || "") + '">';
+    return '<img src="' + m.src + '" alt="' + esc(capOf(m)) + '">';
   }
   var caseVer = "v2";
   function openCase(id, ver) {
@@ -153,9 +154,9 @@
       (legacy ? blk("dlg.v1title", "<p>" + md(T(base.v1note)) + "</p>" + (base.improved ? '<h4 class="subh">' + esc(tt("dlg.improved")) + "</h4>" + ul(L(base.improved)) : ""), "callout") : "") +
       ((p.links && (p.links.demo || p.links.repo)) ? '<div class="dlg-links">' + linkBtns(p, false) + "</div>" : "") +
       (p.coldStart ? '<p class="note">' + esc(tt("dlg.cold")) + "</p>" : "") +
-      '<div class="gal"><div class="gal-main" id="galMain">' + mainMedia(p.media[0]) + '</div><div class="gal-cap mono" id="galCap">' + esc(p.media[0].cap || "") + "</div>" +
+      '<div class="gal"><div class="gal-main" id="galMain">' + mainMedia(p.media[0]) + '</div><div class="gal-cap mono" id="galCap">' + esc(capOf(p.media[0])) + "</div>" +
       '<div class="thumbs" role="list">' + p.media.map(function (m, i) {
-        return '<button class="th" type="button" role="listitem" data-i="' + i + '" aria-current="' + (i === 0) + '" aria-label="' + esc(m.cap || ("#" + (i + 1))) + '">' +
+        return '<button class="th" type="button" role="listitem" data-i="' + i + '" aria-current="' + (i === 0) + '" aria-label="' + esc(capOf(m) || ("#" + (i + 1))) + '">' +
           (m.type === "video" ? '<span class="vid" style="background-image:url(' + m.poster + ')">&#9654;</span>' : '<img src="' + m.src + '" alt="" loading="lazy">') + "</button>";
       }).join("") + "</div></div>" +
       (p.problem ? blk("dlg.problem", "<p>" + md(T(p.problem)) + "</p>", "callout") : "") +
@@ -168,7 +169,7 @@
       b.addEventListener("click", function () {
         var i = +b.getAttribute("data-i"), m = p.media[i];
         D.getElementById("galMain").innerHTML = mainMedia(m);
-        D.getElementById("galCap").textContent = m.cap || "";
+        D.getElementById("galCap").textContent = capOf(m);
         dlgBody.querySelectorAll(".th").forEach(function (o) { o.setAttribute("aria-current", o === b); });
       });
     });
@@ -181,8 +182,8 @@
   }
   function closeCase() { if (dlg.open) dlg.close(); }
   dlg.addEventListener("close", function () {
-    D.body.style.overflow = ""; dlgBody.innerHTML = ""; currentId = null; caseVer = "v2";
-    try { history.replaceState(null, "", location.pathname + location.search + "#projects"); } catch (e) {}
+    D.body.style.overflow = ""; dlgBody.innerHTML = ""; var wasGame = currentId === GAME.id; currentId = null; caseVer = "v2";
+    try { history.replaceState(null, "", location.pathname + location.search + (wasGame ? "#play" : "#projects")); } catch (e) {}
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   });
   dlg.addEventListener("click", function (e) { if (e.target === dlg) closeCase(); });
@@ -190,6 +191,8 @@
 
   /* ---------- events ---------- */
   D.addEventListener("click", function (e) {
+    var card = e.target.closest(".play");
+    if (card && !e.target.closest("a, button") && !e.target.closest("[data-open]")) { openCase(GAME.id); return; }
     var o = e.target.closest("[data-open]");
     if (o) { openCase(o.getAttribute("data-open")); return; }
     var t = e.target.closest(".tech[data-tech]");
