@@ -27,9 +27,11 @@
     D.title = tt("meta.title");
     D.querySelectorAll("[data-i18n]").forEach(function (el) { el.textContent = tt(el.getAttribute("data-i18n")); });
     D.querySelectorAll("[data-i18n-html]").forEach(function (el) { el.innerHTML = tt(el.getAttribute("data-i18n-html")); });
+    D.querySelectorAll("[data-i18n-aria]").forEach(function (el) { el.setAttribute("aria-label", tt(el.getAttribute("data-i18n-aria"))); });
     D.querySelectorAll("#langBtn [data-l]").forEach(function (s) { s.classList.toggle("cur", s.getAttribute("data-l") === lang); });
     var x = D.getElementById("dlgX"); if (x) x.setAttribute("aria-label", tt("dlg.close"));
-    var n = D.getElementById("statProj"); if (n) n.textContent = PROJECTS.length;
+    var lb = D.getElementById("langBtn"); if (lb) { lb.classList.toggle("is-he", lang === "he"); lb.setAttribute("aria-checked", lang === "he"); }
+    var n = D.getElementById("statProj"); if (n) n.textContent = PROJECTS.length + 1; /* +1 = the Fix My Cloud game (own section) */
   }
 
   /* ---------- tech stack ---------- */
@@ -208,6 +210,7 @@
 
   function reduceMotion() { return matchMedia("(prefers-reduced-motion: reduce)").matches; }
   D.getElementById("langBtn").addEventListener("click", function () {
+    this.classList.toggle("is-he"); /* slide the switch right away */
     var swap = function () {
       lang = lang === "en" ? "he" : "en"; store("rk-lang", lang);
       var id = currentId;
@@ -241,7 +244,8 @@
   var vio = "IntersectionObserver" in window ? new IntersectionObserver(function (es) {
     es.forEach(function (en) {
       var v = en.target;
-      if (en.isIntersecting && !reduce) { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); } else v.pause();
+      var cn = navigator.connection, slow = !!(cn && (cn.saveData || /^(slow-2g|2g|3g)$/.test(cn.effectiveType || ""))) && !!v.closest(".play-media");
+      if (en.isIntersecting && !reduce && !slow) { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); } else v.pause();
     });
   }, { threshold: 0.35 }) : null;
   function observeVideos() { if (vio) D.querySelectorAll("[data-lazyvid]").forEach(function (v) { vio.observe(v); }); }
@@ -259,7 +263,7 @@
 
   var links = [].slice.call(D.querySelectorAll(".nav a"));
   var ind = D.querySelector(".nav-ind"), navEl = D.querySelector(".nav"), curId = null;
-  var ids = ["projects", "stack", "approach", "about", "contact"];
+  var ids = ["play", "projects", "stack", "approach", "about", "contact"];
   function moveInd(instant) {
     if (!ind) return;
     var a = links.filter(function (l) { return l.classList.contains("on"); })[0];
