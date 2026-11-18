@@ -12,6 +12,11 @@ window.LINKS = {
 
 window.I18N = {
   en: {
+    "nav.play": "Game", "play.kicker": "Free browser game",
+    "play.lead": "Fix real cloud and DevOps incidents, one level at a time.",
+    "play.sub": "You are the on-call engineer. Find the mistake, fix it, and watch the night turn into dawn.",
+    "play.c1": "8 levels", "play.c2": "HE / EN", "play.c3": "No signup", "play.now": "Play now", "play.code": "View code",
+    "play.alt": "Screen recording of the Fix My Cloud game: a firewall rule that is open to the world is found and fixed, then the night scene turns to dawn.",
     "nav.projects": "Projects", "nav.approach": "Approach", "nav.about": "About", "nav.contact": "Contact",
     "hero.status": "Open to work · Junior DevOps & Cloud Engineer",
     "hero.h1": "I break Kubernetes <mark>on purpose</mark>, to learn how to fix it.",
@@ -55,6 +60,11 @@ window.I18N = {
     "dlg.version": "Version", "dlg.v2": "V2 · current", "dlg.v1": "V1 · original", "dlg.v1title": "About V1", "dlg.improved": "What improved in V2"
   },
   he: {
+    "nav.play": "המשחק", "play.kicker": "משחק דפדפן חינמי",
+    "play.lead": "מתקנים תקלות אמיתיות בענן וב-DevOps, שלב אחרי שלב.",
+    "play.sub": "אתה המהנדס התורן. מוצאים את הטעות, מתקנים אותה, ורואים את הלילה הופך לשחר.",
+    "play.c1": "8 שלבים", "play.c2": "HE / EN", "play.c3": "בלי הרשמה", "play.now": "שחק עכשיו", "play.code": "צפה בקוד",
+    "play.alt": "הקלטת מסך של המשחק Fix My Cloud: מוצאים ומתקנים חוק חומת אש שפתוח לכולם, והלילה הופך לשחר.",
     "nav.projects": "פרויקטים", "nav.approach": "איך אני עובד", "nav.about": "עליי", "nav.contact": "יצירת קשר",
     "hero.status": "פתוח להצעות · Junior DevOps & Cloud Engineer",
     "hero.h1": "אני שובר Kubernetes <mark>בכוונה</mark>, כדי ללמוד איך מתקנים אותו.",
